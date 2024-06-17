@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache"
 export const getTodos = async (todolistId: TodoListT["id"]) => {
   try {
     const response = await fetch(
-      `https://666c14cc49dbc5d7145c8307.mockapi.io/api/todolist/${todolistId}/todos`
+      `https://666c14cc49dbc5d7145c8307.mockapi.io/api/todolist/${todolistId}/todos`,{ cache: "no-store" }
     )
     return response.json()
   } catch (error) {
