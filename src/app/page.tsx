@@ -1,17 +1,32 @@
 import { getTodos } from "@/api/todo.api"
+import { getTodoLists } from "@/api/todoList.api"
 import TodoList from "@/components/TodoList.component"
-import { TodoT } from "@/types/todo.type"
-import { get } from "http"
-import Image from "next/image"
+import { TodoListT } from "@/types/todoList.type"
 
-export default async function Home() {
-  const todos: TodoT[] = await getTodos()
-  const data = ["Created", "In Progress", "Done"]
+interface TodolistScreenI {
+  todolistId: string
+  heading: string
+}
+
+async function TodolistScreen({ todolistId, heading }: TodolistScreenI) {
+  const data = await getTodos(todolistId)
+  return <TodoList todos={data} id={todolistId} heading={heading} />
+}
+
+export default async function HomePage() {
+  const todoLists: TodoListT[] = await getTodoLists()
   return (
-    <div className="flex gap-24 ">
-      {data.map((item, index) => (
-        <TodoList todos={todos} heading={item} key={index} />
-      ))}
+    <div className="flex flex-col sm:flex-row gap-5 pr-5 sm:pr-0  pl-5 pb-5 pt-24">
+      <div className="flex flex-col sm:flex-row sm: gap-5 w-full  overflow-scroll">
+        {todoLists.map((todoList,index) => (
+          <div key={index}>
+            <TodolistScreen
+              todolistId={todoList.id}
+              heading={todoList.name}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
