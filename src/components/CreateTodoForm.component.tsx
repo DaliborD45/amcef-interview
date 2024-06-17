@@ -7,6 +7,7 @@ import { TodoT } from "@/types/todo.type"
 import { addTodo } from "@/api/todo.api"
 import Button from "@/components/Button.component"
 import { useRouter } from "next/navigation"
+import TextArea from "./Textarea.component"
 
 const validationSchema = Yup.object({
   title: Yup.string().required("Title is required"),
@@ -56,7 +57,7 @@ export default function CreateTodoForm({ todoListId }: { todoListId: string }) {
                 name="description"
                 errors={errors.description}
                 touched={touched.description}
-                component={Input}
+                component={TextArea}
               />
               <Field
                 label="Date"
