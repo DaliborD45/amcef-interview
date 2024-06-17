@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache"
 export const getTodos = async (todolistId: TodoListT["id"]) => {
   try {
     const response = await fetch(
-      `https://666c14cc49dbc5d7145c8307.mockapi.io/api/todolist/${todolistId}/todos`,{ cache: "no-store" }
+      `https://666c14cc49dbc5d7145c8307.mockapi.io/api/todolist/${todolistId}/todos`,{ cache: "no-cache" }
     )
     return response.json()
   } catch (error) {
@@ -78,7 +78,7 @@ export const getTodo = async (
   try {
     const response = await fetch(
       `https://666c14cc49dbc5d7145c8307.mockapi.io/api/todolist/${todolistId}/todos/${todoId}`,
-      { cache: "no-store" }
+      { cache: "no-cache" }
     )
     return response.json()
   } catch (error) {
